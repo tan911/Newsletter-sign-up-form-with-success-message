@@ -1,23 +1,25 @@
+import ResponsiveImage from './ResponsiveImage';
 import { ReactComponent as FillCheckCircle } from '../assets/images/icon-list.svg';
-import image1 from '../assets/images/illustration-sign-up-desktop.svg';
 
 function Container() {
   return (
     <div className="container">
       <div className="start">
-        <h1 className="font-Roboto-Bold text-5xl text-semi-grey">Stay updated!</h1>
-        <p className="py-5 text-bg-color">Join 60,000+ product managers receiving monthly updates on:</p>
+        <h1 className="font-Roboto-Bold text-3xl text-semi-grey mobile:text-4xl laptop:text-5xl">Stay updated!</h1>
+        <p className="py-5 text-sm text-bg-color mobile:text-base">
+          Join 60,000+ product managers receiving monthly updates on:
+        </p>
         <ul className="pt-3 pb-8">
           <li className="list-icons">
-            <FillCheckCircle />
+            <FillCheckCircle aria-hidden="true" focusable="false" className="icons" />
             Product discovery and building what matters
           </li>
           <li className="list-icons">
-            <FillCheckCircle />
+            <FillCheckCircle aria-hidden="true" focusable="false" className="icons" />
             Measuring to ensure updates are a success
           </li>
           <li className="list-icons">
-            <FillCheckCircle />
+            <FillCheckCircle aria-hidden="true" focusable="false" className="icons" />
             And much more!
           </li>
         </ul>
@@ -40,8 +42,8 @@ function Container() {
           </form>
         </div>
       </div>
-      <div>
-        <img src={image1} alt="Illustration" />
+      <div className="end">
+        <ResponsiveImage />
       </div>
     </div>
   );
