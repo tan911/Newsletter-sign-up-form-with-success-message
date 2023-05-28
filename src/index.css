@@ -38,4 +38,8 @@
   .icons {
     @apply self-start;
   }
+
+  .error {
+    @apply border-red-400 focus:border-red-400 bg-red-100;
+  }
 }

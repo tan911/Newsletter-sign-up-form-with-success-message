@@ -1,7 +1,30 @@
+import { useState } from 'react';
+
 import ResponsiveImage from './ResponsiveImage';
+import validateEmail from './validateEmail';
 import { ReactComponent as FillCheckCircle } from '../assets/images/icon-list.svg';
 
 function Container() {
+  const [email, setEmail] = useState('');
+  const [isError, setIsError] = useState(false);
+
+  const inputHandler = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+
+    const isValidate = validateEmail(email);
+
+    if (!isValidate) {
+      setIsError(true);
+    } else {
+      setEmail('');
+      setIsError(false);
+    }
+  };
+
   return (
     <div className="container">
       <div className="start">
@@ -24,17 +47,30 @@ function Container() {
           </li>
         </ul>
         <div>
-          <form>
-            <div className="mb-5">
+          <form onSubmit={formSubmitHandler}>
+            <div className="mb-5 relative">
               <label htmlFor="email" className="text-xs font-Roboto-Bold text-semi-grey block mb-2">
                 Email Address
               </label>
               <input
                 id="email"
-                type="email"
+                type="text"
+                value={email}
+                onChange={inputHandler}
                 placeholder="email@company.com"
-                className="border px-6 py-3 w-full rounded-md outline-none focus:border-semi-grey"
+                className={`border px-6 py-3 w-full rounded-md outline-none ${
+                  isError ? 'error' : 'focus:border-semi-grey'
+                }`}
+                aria-describedby="error-message"
+                required
               />
+              <span
+                id="error-message"
+                aria-live="polite"
+                className={`text-xs absolute top-0 right-0 text-primary ${isError ? 'block' : 'hidden'}`}
+              >
+                Valid email required
+              </span>
             </div>
             <button className="bg-semi-grey text-white px-2 py-4 w-full rounded-md transition-all ease-out duration-300 hover:bg-gradient-to-r from-rose-500 to-primary hover:shadow-lg hover:shadow-rose-500/50">
               Subscribe to monthly newsletter
