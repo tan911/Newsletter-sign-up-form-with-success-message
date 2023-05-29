@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
 import ResponsiveImage from './ResponsiveImage';
+import Button from './Button';
 import validateEmail from './validateEmail';
 import { ReactComponent as FillCheckCircle } from '../assets/images/icon-list.svg';
 
-function Container() {
+function Container({ onDisplayMessage }) {
   const [email, setEmail] = useState('');
   const [isError, setIsError] = useState(false);
 
@@ -22,6 +23,7 @@ function Container() {
     } else {
       setEmail('');
       setIsError(false);
+      onDisplayMessage(true, email);
     }
   };
 
@@ -72,9 +74,7 @@ function Container() {
                 Valid email required
               </span>
             </div>
-            <button className="bg-semi-grey text-white px-2 py-4 w-full rounded-md transition-all ease-out duration-300 hover:bg-gradient-to-r from-rose-500 to-primary hover:shadow-lg hover:shadow-rose-500/50">
-              Subscribe to monthly newsletter
-            </button>
+            <Button>Subscribe to monthly newsletter</Button>
           </form>
         </div>
       </div>
